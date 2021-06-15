@@ -1,6 +1,6 @@
 FROM python:3.7-slim
 
-WORKDIR /usr/src/duo34/backend
+WORKDIR /usr/src/spidy/backend
 
 RUN apt-get upgrade && pip install --upgrade pip 
 
