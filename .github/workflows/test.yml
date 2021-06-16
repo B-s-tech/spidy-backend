@@ -24,10 +24,3 @@ jobs:
       - name: Run Test
         run: docker-compose run web pytest
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to heroku
-        if: github.event.pull_request.merged == true
-        run: echo "program deploy to heroku"
