@@ -25,9 +25,10 @@ def post_question():
   question_number = request.json.get('question_number')
   section_id = request.json.get('section_id')
   english_text = request.json.get('english_text')
-  japanese_text = request.json.get('japanese_text')
+  image_path = request.json.get('image_data')
+  keywords = request.json.get('keywords')
 
-  question = Question(question_number, section_id, english_text, japanese_text)
+  question = Question(question_number, section_id, english_text, image_path, keywords)
   db.session.add(question)
   db.session.commit()
 

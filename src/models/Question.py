@@ -1,4 +1,5 @@
 import datetime as dt
+from sqlalchemy.dialects import postgresql
 from src import db
 import pytz
 
@@ -8,7 +9,8 @@ class Question(db.Model):
   question_number = db.Column(db.Integer, nullable=False)
   section_id = db.Column(db.Integer, nullable=False)
   english_text = db.Column(db.String(255), nullable=False)
-  japanese_text = db.Column(db.String(255), nullable=False)
+  image_path = db.Column(db.String(255), nullable=False)
+  keywords = db.Column(postgresql.ARRAY(db.String(255)))
   created_at = db.Column(db.DateTime, nullable=False, default=dt.datetime.now(pytz.timezone('Asia/Tokyo')))
   updated_at = db.Column(db.DateTime, nullable=False, default=dt.datetime.now(pytz.timezone('Asia/Tokyo')))
 
