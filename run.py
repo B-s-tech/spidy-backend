@@ -4,6 +4,8 @@ from flask_cors import CORS
 
 app.config['JSON_AS_ASCII'] = False
 db.init_app(app)
+db.create_all()
+db.session.commit()
 Migrate(app, db)
 CORS(app)
 

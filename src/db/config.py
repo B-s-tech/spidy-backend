@@ -1,8 +1,11 @@
 import os
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///{db_path}/{db_name}'.format(**{
-  'db_path': os.path.dirname(os.path.abspath(__file__)),
-  'db_name': 'duo34.db'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{password}@{host}:{port}/{db_name}'.format(**{
+  'user': 'postgres',
+  'password': 'postgres',
+  'host': 'spidy-db',
+  'port': '5432',
+  'db_name': 'db'
 })
 SECRET_KEY = os.urandom(24)
 
