@@ -30,4 +30,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Deploy to heroku
         if: github.event.pull_request.merged == true
-        steps: echo "program deploy to heroku"
+        run: echo "program deploy to heroku"
