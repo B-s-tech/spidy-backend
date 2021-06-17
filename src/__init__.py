@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('src.db.config')
+app.config.from_object('src.config.S3Config')
 
 db = SQLAlchemy(app)
 
