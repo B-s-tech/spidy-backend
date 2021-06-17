@@ -1,3 +1,5 @@
+import io
+import boto3
 from src import app, db
 from flask import jsonify, request
 from src.models.Question import Question
@@ -25,8 +27,24 @@ def post_question():
   question_number = request.json.get('question_number')
   section_id = request.json.get('section_id')
   english_text = request.json.get('english_text')
-  image_path = request.json.get('image_data')
   keywords = request.json.get('keywords')
+
+  uploaded_file = request.files['file']
+  if uploaded_file.filename == '':
+    return jsonify(message='input image file'), 400
+  
+  s3_bucket = app.config['S3_BUCKET']
+  s3_dir = app.config['S3_DIR']
+  s3 = boto3.client('s3', region_name='ap-northeat-1')
+  response = s3.put_object(
+    Body = io.BufferedReader(uploaded_file).read(),
+    Bucket = s3_bucket,
+    Key = f'{s3_dir}/{uploaded_file.filename}'
+  )
+  if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+    return jsonify(message='S3へのアップロードでエラーが発生しました'), 500
+
+  image_path = f'{s3_dir}/{uploaded_file.filename}'
 
   question = Question(question_number, section_id, english_text, image_path, keywords)
   db.session.add(question)
